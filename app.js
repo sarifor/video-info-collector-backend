@@ -80,6 +80,8 @@ const getData = async () => {
       const videos = testData;
       return videos;    
     }) */
+    const videos = testData;
+    return videos;    
   } catch (e) {
     const videos = testData;
     return videos;
