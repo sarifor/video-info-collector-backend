@@ -43,7 +43,8 @@ const testData = [
 ];
 
 const getData = async () => {
-  try {
+  try { 
+    /*
     // Fetch latest infomation of five videos from a YouTube channel
     const latestFiveVideos = await axios(`
       https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=UCkIu9pkxvDcnBs4Tl4seMFw&maxResults=5&order=date&type=video&key=${API_KEY}`
@@ -78,7 +79,7 @@ const getData = async () => {
       // Return test object if api returns error or exceeds quota per day
       const videos = testData;
       return videos;    
-    })
+    }) */
   } catch (e) {
     const videos = testData;
     return videos;
