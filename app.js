@@ -9,10 +9,9 @@ const secretmanagerClient = new SecretManagerServiceClient();
 
 let API_KEY;
 
-//
 const getData = async () => {
   // Fetch latest infomation of five videos from a YouTube channel
-  const latestFiveVideos = await fetch(`
+  const latestFiveVideos = await axios(`
     https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=UCkIu9pkxvDcnBs4Tl4seMFw&maxResults=5&order=date&type=video&key=${API_KEY}`
   ).then(response => response.json())
     .catch(error => {
