@@ -18,8 +18,39 @@ const getData = async () => {
 
         const result = await client.get();
         return result;
-    } catch (e) {
+    } catch (e) { // Return test data usually when exceeded quota per day
         console.log(e);
+        const videos = {
+            "0": {
+              "items": [
+                {
+                  "snippet": {
+                    "topLevelComment": {
+                      "snippet": {
+                        "publishedAt": "2024/4/1",
+                        "textDisplay": "Visit Australia"
+                      }
+                    }
+                  }
+                }
+              ]
+            },
+            "1": {
+              "items": [
+                {
+                  "snippet": {
+                    "topLevelComment": {
+                      "snippet": {
+                        "publishedAt": "2024/4/2",
+                        "textDisplay": "Wanna meet cockatoos!"
+                      }
+                    }
+                  }
+                }
+              ]
+            },
+          }
+        return videos;        
     }
 }
 
