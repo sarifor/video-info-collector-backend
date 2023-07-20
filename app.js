@@ -89,6 +89,8 @@ const getData = async () => {
   return videos;
 };
 
+app.use(cors());
+
 async function callAccessSecretVersion() {
     try {
         const request = {
@@ -102,8 +104,6 @@ async function callAccessSecretVersion() {
     }
 }
 callAccessSecretVersion();
-
-app.use(cors());
 
 app.get('/', async (req, res) => {
     try {
