@@ -8,7 +8,7 @@ const port = 3000;
 const secretmanagerClient = new SecretManagerServiceClient();
 
 let API_KEY;
-
+/*
 const getData = async () => {
     try {
         const baseURL = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=UCkIu9pkxvDcnBs4Tl4seMFw&maxResults=5&order=date&type=video&key=${API_KEY}`
@@ -22,7 +22,7 @@ const getData = async () => {
         console.log(e);
     }
 }
-
+*/
 app.use(cors());
 
 async function callAccessSecretVersion() {
@@ -32,6 +32,7 @@ async function callAccessSecretVersion() {
         };
         const response = await secretmanagerClient.accessSecretVersion(request);
         API_KEY = response[0].payload.data.toString('utf-8'); // index starts from 0
+        console.log(API_KEY)
     } catch (e) {
         console.log(e);
     }
@@ -40,9 +41,9 @@ callAccessSecretVersion();
 
 app.get('/', async (req, res) => {
     try {
-        const result = await getData();
-        console.log("come?")
-        res.send(result);
+        // const result = await getData();
+        res.send(OK);
+        // res.send(result);
     } catch (e) {
         console.log(e);
     }
