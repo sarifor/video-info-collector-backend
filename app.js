@@ -16,8 +16,8 @@ const getData = async () => {
             baseURL: baseURL
         });
 
-        const response = await client.get();
-        return response;
+        const result = await client.get();
+        return result;
     } catch (e) {
         console.log(e);
     }
