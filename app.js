@@ -16,8 +16,8 @@ const testData = [
         "snippet": {
           "topLevelComment": {
             "snippet": {
-              "publishedAt": "2024/4/1",
-              "textDisplay": "Visit Australia",
+              "publishedAt": "2024/4/1 (test data from server)",
+              "textDisplay": "Visit Australia (test data from server)",
               "authorDisplayName": "앵무새사남매-루몽다로"
             }
           }
@@ -31,8 +31,8 @@ const testData = [
         "snippet": {
           "topLevelComment": {
             "snippet": {
-              "publishedAt": "2024/4/2",
-              "textDisplay": "Wanna meet cockatoos!",
+              "publishedAt": "2024/4/2 (test data from server)",
+              "textDisplay": "Wanna meet cockatoos! (test data from server)",
               "authorDisplayName": "앵무새사남매-루몽다로"
             }
           }
@@ -43,7 +43,8 @@ const testData = [
 ];
 
 const getData = async () => {
-  /* try { 
+  /* Get Data using Youtube API
+  try { 
     // Fetch latest infomation of five videos from a YouTube channel
     const latestFiveVideos = await axios(`
       https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=UCkIu9pkxvDcnBs4Tl4seMFw&maxResults=5&order=date&type=video&key=${API_KEY}`
