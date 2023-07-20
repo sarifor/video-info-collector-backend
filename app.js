@@ -10,15 +10,70 @@ const secretmanagerClient = new SecretManagerServiceClient();
 let API_KEY;
 
 const getData = async () => {
-  // Fetch latest infomation of five videos from a YouTube channel
-  const latestFiveVideos = await axios(`
-    https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=UCkIu9pkxvDcnBs4Tl4seMFw&maxResults=5&order=date&type=video&key=${API_KEY}`
-  ).then(response => response.json())
-    .catch(error => {
+  try {
+    // Fetch latest infomation of five videos from a YouTube channel
+    const latestFiveVideos = await axios(`
+      https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=UCkIu9pkxvDcnBs4Tl4seMFw&maxResults=5&order=date&type=video&key=${API_KEY}`
+    ).then(response => response.json())
+      .catch(error => {
+        console.log(error);
+
+        // Return test object if api returns error or exceeds quota per day
+        const latestFiveVideos = { // Type is JSON?
+          "0": {
+            "items": [
+              {
+                "snippet": {
+                  "topLevelComment": {
+                    "snippet": {
+                      "publishedAt": "2024/4/1",
+                      "textDisplay": "Visit Australia"
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          "1": {
+            "items": [
+              {
+                "snippet": {
+                  "topLevelComment": {
+                    "snippet": {
+                      "publishedAt": "2024/4/2",
+                      "textDisplay": "Wanna meet cockatoos!"
+                    }
+                  }
+                }
+              }
+            ]
+          },
+        }
+        return latestFiveVideos;
+
+      });
+    
+    // Extract video ids and put them into an array
+    const videoIds = latestFiveVideos.items.map(item => item.id.videoId);
+
+    // Create an array of YouTube comment api url including video ids extracted
+    const urls = videoIds.map((videoId) => 
+      `https://youtube.googleapis.com/youtube/v3/commentThreads?part=snippet&maxResults=1&videoId=${videoId}&key=${API_KEY}`
+    );
+
+    // Fetch each comment at the same time using YouTube comment api url including video ids extracted
+    const videos = await Promise.all([fetch(urls[0]), fetch(urls[1]), fetch(urls[2]), fetch(urls[3]), fetch(urls[4])]).then(responses => {
+      return Promise.all(responses.map(response => {
+        return response.json();
+      }));
+    }).then(json => {
+      const videos = json;
+      return videos;
+    }).catch(error => {
       console.log(error);
 
       // Return test object if api returns error or exceeds quota per day
-      const latestFiveVideos = { // Type is JSON?
+      const videos = { // Type is JSON?
         "0": {
           "items": [
             {
@@ -48,31 +103,13 @@ const getData = async () => {
           ]
         },
       }
-      return latestFiveVideos;
 
-    });
-  
-  // Extract video ids and put them into an array
-  const videoIds = latestFiveVideos.items.map(item => item.id.videoId);
+      
+    })
 
-  // Create an array of YouTube comment api url including video ids extracted
-  const urls = videoIds.map((videoId) => 
-    `https://youtube.googleapis.com/youtube/v3/commentThreads?part=snippet&maxResults=1&videoId=${videoId}&key=${API_KEY}`
-  );
-
-  // Fetch each comment at the same time using YouTube comment api url including video ids extracted
-  const videos = await Promise.all([fetch(urls[0]), fetch(urls[1]), fetch(urls[2]), fetch(urls[3]), fetch(urls[4])]).then(responses => {
-    return Promise.all(responses.map(response => {
-      return response.json();
-    }));
-  }).then(json => {
-    const videos = json;
     return videos;
-  }).catch(error => {
-    console.log(error);
-
-    // Return test object if api returns error or exceeds quota per day
-    const videos = { // Type is JSON?
+  } catch (e) {
+    const videos = {
       "0": {
         "items": [
           {
@@ -101,12 +138,9 @@ const getData = async () => {
           }
         ]
       },
-    }
-
+    }    
     return videos;
-  });
-
-  return videos; // Must-use to return the result of _callApi() in _getVideos()
+  }
 };
 
 app.use(cors());
