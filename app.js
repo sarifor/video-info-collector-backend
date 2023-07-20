@@ -9,6 +9,39 @@ const secretmanagerClient = new SecretManagerServiceClient();
 
 let API_KEY;
 
+const testData = [
+  {
+    "items": [
+      {
+        "snippet": {
+          "topLevelComment": {
+            "snippet": {
+              "publishedAt": "2024/4/1",
+              "textDisplay": "Visit Australia",
+              "authorDisplayName": "앵무새사남매-루몽다로"
+            }
+          }
+        }
+      }
+    ]
+  },
+  {
+    "items": [
+      {
+        "snippet": {
+          "topLevelComment": {
+            "snippet": {
+              "publishedAt": "2024/4/2",
+              "textDisplay": "Wanna meet cockatoos!",
+              "authorDisplayName": "앵무새사남매-루몽다로"
+            }
+          }
+        }
+      }
+    ]
+  },
+];
+
 const getData = async () => {
   try {
     // Fetch latest infomation of five videos from a YouTube channel
@@ -19,38 +52,8 @@ const getData = async () => {
         console.log(error);
 
         // Return test object if api returns error or exceeds quota per day
-        const latestFiveVideos = { // Type is JSON?
-          "0": {
-            "items": [
-              {
-                "snippet": {
-                  "topLevelComment": {
-                    "snippet": {
-                      "publishedAt": "2024/4/1",
-                      "textDisplay": "Visit Australia"
-                    }
-                  }
-                }
-              }
-            ]
-          },
-          "1": {
-            "items": [
-              {
-                "snippet": {
-                  "topLevelComment": {
-                    "snippet": {
-                      "publishedAt": "2024/4/2",
-                      "textDisplay": "Wanna meet cockatoos!"
-                    }
-                  }
-                }
-              }
-            ]
-          },
-        }
+        const latestFiveVideos = testData;
         return latestFiveVideos;
-
       });
     
     // Extract video ids and put them into an array
@@ -73,72 +76,11 @@ const getData = async () => {
       console.log(error);
 
       // Return test object if api returns error or exceeds quota per day
-      const videos = { // Type is JSON?
-        "0": {
-          "items": [
-            {
-              "snippet": {
-                "topLevelComment": {
-                  "snippet": {
-                    "publishedAt": "2024/4/1",
-                    "textDisplay": "Visit Australia"
-                  }
-                }
-              }
-            }
-          ]
-        },
-        "1": {
-          "items": [
-            {
-              "snippet": {
-                "topLevelComment": {
-                  "snippet": {
-                    "publishedAt": "2024/4/2",
-                    "textDisplay": "Wanna meet cockatoos!"
-                  }
-                }
-              }
-            }
-          ]
-        },
-      }
-
-      
+      const videos = testData;
+      return videos;    
     })
-
-    return videos;
   } catch (e) {
-    const videos = {
-      "0": {
-        "items": [
-          {
-            "snippet": {
-              "topLevelComment": {
-                "snippet": {
-                  "publishedAt": "2024/4/1",
-                  "textDisplay": "Visit Australia"
-                }
-              }
-            }
-          }
-        ]
-      },
-      "1": {
-        "items": [
-          {
-            "snippet": {
-              "topLevelComment": {
-                "snippet": {
-                  "publishedAt": "2024/4/2",
-                  "textDisplay": "Wanna meet cockatoos!"
-                }
-              }
-            }
-          }
-        ]
-      },
-    }    
+    const videos = testData;
     return videos;
   }
 };
