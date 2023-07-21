@@ -94,7 +94,7 @@ app.use(cors());
 async function callAccessSecretVersion() {
     try {
         const request = {
-            name: "projects/493842336457/secrets/youtube_api/versions/1",
+            name: "projects/493842336457/secrets/youtube_api/versions/1", // Use own resource name
         };
         const res = await secretmanagerClient.accessSecretVersion(request); // can be accessed only in VM instance
         API_KEY = res[0].payload.data.toString('utf-8'); // index starts from 0 
