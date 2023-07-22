@@ -28,8 +28,8 @@
 > 4. Youtube API Key를 GCP의 Secret Manager에 저장합니다.
 > 5. VM 인스턴스에서 Secret Manager에 저장된 Youtube API Key를 사용할 수 있도록 설정합니다.
 >    - 5.1 VM 인스턴스의 '액세스 범위'를 '모든 Cloud API에 대한 전체 액세스 허용'으로 변경
->    - 5.2 VM 인스턴스의 '서비스 계정' 값을, Secret Manager의 secret manager의 '보안비밀 관리자 보안비밀 접근자'로 설정
-> 6. 김로미의 얼굴을 떠올리고 살짝 미소가 지어졌다면, 환경 준비 성공입니다.
+> 6. Secret Manager에 저장한 Youtube API Key에서, VM 인스턴스의 '서비스 계정' 값을 '보안비밀 관리자 보안비밀 접근자'로 설정
+> 7. 김로미의 얼굴을 떠올리고 살짝 미소가 지어졌다면, 환경 준비 성공입니다.
 
 ### Installing
 환경이 마련되면, 깃허브에서 프로젝트를 다운로드하여, 프로젝트에 쓰이는 패키지를 설치하고 실행합니다.
